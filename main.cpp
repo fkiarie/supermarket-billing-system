@@ -150,12 +150,10 @@ void shopping ::add(){
     fstream data;
     int c;
     int token{0};
-    float n;
     float p;
     float d;
-    //int col_width{20};
-    //string n;
-
+    string n;
+    cout << endl;
     cout << "Add new product: " << endl;
     cout << endl;
     cout << "\t Product code: ";
@@ -177,13 +175,13 @@ void shopping ::add(){
     }
     else
     {
-        data<<c<<n<<p<<d;
+        data>>c>>n>>p>>d;
             while(!data.eof()){
                 if(c == pcode)
                 {
                     token++;
                 }
-                data<<c<<n<<p<<d;
+                data>>c>>n>>p>>d;
             }
             data.close();
 
@@ -200,7 +198,9 @@ void shopping ::add(){
         }
 
     }
+    cout << endl;
     cout << "\t Record inserted" << endl;
+    cout << endl;
 
 }
 void shopping :: edit()
@@ -305,12 +305,11 @@ void shopping::list()
     data.open("database.txt", ios::in);
     cout << "\t--------------------\n";
     cout << left;
-    cout<<setw(col_width)<<"Product code"<<setw(col_width)<<"Product Name"<<setw(col_width)<<"Price"<<endl;
-    cout << "\t--------------------\n";
+    cout<<setw(col_width)<<"Product code"<<setw(col_width)<<"Product Name"<<setw(col_width)<<"Price"<<setw(col_width)<<"discount"<<endl;
     data>>pcode>>pname>>price>>discount;
     while(!data.eof())
     {
-        cout<<setw(col_width)<<pcode<<setw(col_width)<<pname<<setw(col_width)<<price<<endl;
+        cout<<setw(col_width)<<pcode<<setw(col_width)<<pname<<setw(col_width)<<price<<setw(col_width)<<discount<<endl;
         data>>pcode>>pname>>price>>discount;
     }
     data.close();
@@ -337,7 +336,7 @@ void shopping::receipt()
     {
         data.close();
         list();
-        cout << "\t\t----------------------------------\n\n";
+        cout << "\t\t----------------------------------\n";
         cout << "\t\t --- Place your order: ---\n";
         cout << "\t\t----------------------------------\n\n";
         do
@@ -376,7 +375,7 @@ void shopping::receipt()
                 {
                     amount = price * arrq[i];
                     dis = amount -(amount *dis/100);
-                    total = total -dis;
+                    total = total +dis;
                     cout<<setw(col_width)<<pcode<<setw(col_width)<<pname<<setw(col_width)<<arrq[i]<<setw(col_width)<<price<<setw(col_width)<<amount<<setw(col_width)<<dis<<endl;
 
                 }
