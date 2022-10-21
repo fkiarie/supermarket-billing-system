@@ -217,14 +217,14 @@ void shopping :: edit()
     cout << "\t Enter product key: ";
     cin >> pkey;
 
-    data.open("database.txt" , ios :: in);
+    data.open("database.txt" , ios::in);
     if(!data)
     {
         cout << "\t\tFile does not exist" << endl;
     }else
     {
         data1.open("database1.txt", ios::app | ios::out);
-        data<<pcode<<pname<<price<<discount;
+        data>>pcode>>pname>>price>>discount;
         while(!data.eof())
         {
             if(pkey == pcode)
@@ -245,7 +245,7 @@ void shopping :: edit()
             {
                 data<<setw(col_width)<<pcode<<setw(col_width)<<pname<<setw(col_width)<<price<<setw(col_width)<<discount<<endl;
             }
-            data<<pcode<<pname<<price<<discount;
+            data>>pcode>>pname>>price>>discount;
         }
         data.close();
         data1.close();
